@@ -1,3 +1,12 @@
+<?php
+require_once('function.php');
+
+if ($password != "") {
+    session_start();
+    $_SESSION['password'] = $password;
+    header('Location: ./password.php');
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,21 +17,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <title>Document</title>
 </head>
-<?php
-$length = $_GET['length'];
-var_dump($length);
-function generateRandomPassword($length = 5)
-{
-    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()_+';
-    $charactersLength = strlen($characters);
-    $randomString = '';
-    for ($i = 0; $i < $length; $i++) {
-        $randomString .= $characters[rand(0, $charactersLength - 1)];
-    }
-    return $randomString;
-}
-
-?>
 
 <body>
     <div class="container">
@@ -32,7 +26,7 @@ function generateRandomPassword($length = 5)
             <h2 class="text-center">Genera una password sicura</h2>
         </header>
         <main>
-            <form class="row g-4 ">
+            <form class="row g-4" method="GET">
 
                 <div class="col-md-12">
                     <label for="length">Lunghezza password</label>
@@ -78,7 +72,7 @@ function generateRandomPassword($length = 5)
                 </div>
 
             </form>
-            <h4 class="mt-4">La tua password è : <?php echo generateRandomPassword($length) ?></h4>
+
         </main>
     </div>
     <!--Bootstrap js-->
